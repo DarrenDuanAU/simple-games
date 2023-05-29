@@ -5,9 +5,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Link,
-  // useNavigate,
-  // useParams
+  Link
 } from 'react-router-dom';
 import Blanko from './Blanko';
 import Slido from './Slido';
@@ -37,7 +35,6 @@ function App() {
         method: 'GET',
         headers: {
           'Content-type': 'application/json',
-          // Authorization: `Bearer ${token}`,
         }
       })
       if(response){
