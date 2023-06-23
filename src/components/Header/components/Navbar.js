@@ -5,9 +5,9 @@ const Navbar = ({
 }) => {
   const PAGES_NAME = [
     { page: "Home" },
-    { page: "Slido" },
-    { page: "Tetro" },
-    { page: "Blanko" },
+    { page: "Tetris" },
+    { page: "Sliding Puzzle" },
+    { page: "Word Guess" },
   ];
 
 

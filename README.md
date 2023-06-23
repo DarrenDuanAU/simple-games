@@ -10,9 +10,9 @@ The basic structure of this project:
   - Home
     - Name
     - Score Board
-  - Blanko
-  - Slido
-  - Tetro
+  - Word Guess
+  - Sliding Puzzle
+  - Tetris
 
 ## Available Scripts
 

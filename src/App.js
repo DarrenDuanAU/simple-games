@@ -1,9 +1,10 @@
 import './App.css';
-import Blanko from './components/Blanko/Blanko';
-import Slido from './components/Slido';
-import Tetro from './components/Tetro';
+import WordGuess from './components/WordGuess';
+import SlidingPuzzle from './components/SlidingPuzzle';
+import Tetris from './components/Tetris';
 import Home from './components/Home';
 import Header from './components/Header';
+import Footer from './components/Footer'
 import { useState } from 'react'
 import React from 'react'
 
@@ -16,10 +17,21 @@ function App() {
   return (
     <>
       <Header onHeaderClick={ButtonClickHandler}/>
-      {(currentPage === "Home") && <Home />}
-      {(currentPage === "Slido") && <Slido />}
-      {(currentPage === "Tetro") && <Tetro />}
-      {(currentPage === "Blanko") && <Blanko />}
+      <div className ='page'>
+        <div className="content">
+          {(currentPage === "Home") && <Home />}
+        </div>
+        <div className="content">
+          {(currentPage === "Sliding Puzzle") && <SlidingPuzzle />}
+        </div>
+        <div className="content">
+          {(currentPage === "Tetris") && <Tetris />}
+        </div>
+        <div className="content">
+          {(currentPage === "Word Guess") && <WordGuess />}
+        </div>
+      </div>
+      <Footer />
     </>
   )
 }

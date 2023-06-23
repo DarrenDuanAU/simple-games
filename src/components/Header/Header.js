@@ -1,4 +1,4 @@
-import Log from './components/Log'
+import Logo from './components/Logo'
 import Navbar from './components/Navbar'
 
 const Header = ({
@@ -8,7 +8,7 @@ const Header = ({
 
   return (
     <div className='header'>
-      <Log />
+      <Logo />
       <Navbar onNavbarClick={onHeaderClick}/>
     </div>
   )
