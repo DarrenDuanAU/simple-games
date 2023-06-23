@@ -1,11 +1,15 @@
 import Log from './components/Log'
 import Navbar from './components/Navbar'
 
-const Header = () => {
+const Header = ({
+  onHeaderClick
+}) => {
+
+
   return (
     <div className='header'>
       <Log />
-      <Navbar />
+      <Navbar onNavbarClick={onHeaderClick}/>
     </div>
   )
 }

@@ -1,6 +1,8 @@
 import Button from './Button'
 
-const Navbar = () => {
+const Navbar = ({
+  onNavbarClick
+}) => {
   const PAGES_NAME = [
     { page: "Home" },
     { page: "Slido" },
@@ -9,14 +11,10 @@ const Navbar = () => {
   ];
 
 
-  const PageHandler = () => {
-    alert({page})
-  }
-
   return (
     <div>
       {PAGES_NAME.map(({page}) => ( 
-      <Button key={page} onClick={PageHandler}>
+      <Button key={page} onClick={() => onNavbarClick(page)}>
         {page}
       </Button> ))}
     </div>
