@@ -17,19 +17,11 @@ function App() {
   return (
     <>
       <Header onHeaderClick={ButtonClickHandler}/>
-      <div className ='page'>
-        <div className="content">
-          {(currentPage === "Home") && <Home />}
-        </div>
-        <div className="content">
-          {(currentPage === "Sliding Puzzle") && <SlidingPuzzle />}
-        </div>
-        <div className="content">
-          {(currentPage === "Tetris") && <Tetris />}
-        </div>
-        <div className="content">
-          {(currentPage === "Word Guess") && <WordGuess />}
-        </div>
+      <div className='page'>          
+        {(currentPage === "Home") && <Home />}
+        {(currentPage === "Sliding Puzzle") && <SlidingPuzzle />}
+        {(currentPage === "Tetris") && <Tetris />}
+        {(currentPage === "Word Guess") && <WordGuess />}
       </div>
       <Footer />
     </>

@@ -44,6 +44,24 @@
   align-items: center;
 }
 
+.SlidingPuzzle_container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 360px;
+  width: 360px;
+  background-color: #eee;
+  border: #000 blanchedalmond;
+}
+
+.Cell {
+  height: 120px;
+  width: 120px;
+  background-color: red;
+}
+
+
+
+
 .footer {
   display: flex;
   justify-content: space-between;
