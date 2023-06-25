@@ -1,17 +1,17 @@
 
 const Cell = ({
   piece,
-  onCellClick
+  onClick
 }) => {
   return (
     <div 
       className="cell"
-      onClick={onCellClick}
+      onClick={onClick}
     >
       <img 
         src={piece}
-        width={118} 
-        height={118} 
+        width={120} 
+        height={120} 
       >
       </img>
     </div>

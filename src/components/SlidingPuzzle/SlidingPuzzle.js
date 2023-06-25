@@ -17,17 +17,17 @@ const SlidingPuzzle = () => {
 
   return(
     <div>
-      <div className="SlidingPuzzle_main_container">
+      <div className="main_container SlidingPuzzle_main_container">
         {CELL_INDEX.map((index) => 
           (<Cell key={index} 
             piece={SHREK_PIECES[index]}
-            onCellClick = {() => switchImage(index)}
+            onClick = {() => switchImage(index)}
             />) ) 
         }
       </div>
-      <div className='SlidingPuzzle_low_container'>
+      <div className='low_container'>
         <Button>Start</Button>
-        <Button>Check</Button>
+        <Button>Solve</Button>
       </div>
     </div>
   )
