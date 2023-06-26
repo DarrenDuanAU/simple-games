@@ -1,6 +1,9 @@
-const Block = () => {
+const Block = ({
+  index
+}) => {
   return (
-    <div className="chip">
+    <div className="block">
+      {index}
     </div>
   )
 }

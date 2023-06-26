@@ -56,15 +56,11 @@
   width: 360px;
 }
 
-.Tetris_main_container {
-  height: 450px;
-  width: 300px;
-}
-
 .low_container {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 10px;
 }
 
 .cell {
@@ -74,13 +70,33 @@
   background-color: #eee;
 }
 
-.chip {
+.Tetris_main_container {
+  height: 450px;
+  width: 300px;
+}
+
+.block {
   border:1px solid #000;
   height: 28px;
   width: 28px;
   background-color: #439CEF;
 }
 
+.block_active {
+  background-color: red;
+}
+
+.WordGuess_main_container {
+  height: 50px;
+  width: 600px;
+}
+
+.chip{
+  border:1px solid #000;
+  height: 48px;
+  width: 48px;
+  background-color: #439CEF;
+}
 
 .footer {
   display: flex;
