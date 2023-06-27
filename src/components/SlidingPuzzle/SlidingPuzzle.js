@@ -5,6 +5,7 @@ import { chip0, chip1, chip2, chip3, chip4, chip5,
 
 const SlidingPuzzle = ({
   startTheGame,
+  SolveTheGame,
   imageLocationIndex,
   gameStatus
 }) => {
@@ -30,7 +31,7 @@ const SlidingPuzzle = ({
       </div>
       <div className='low_container'>
         <Button onClick={startTheGame}>Start</Button>
-        <Button>Solve</Button>
+        <Button onClick={SolveTheGame}>Solve</Button>
       </div>
     </div>
   )

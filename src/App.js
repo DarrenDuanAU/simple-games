@@ -28,6 +28,12 @@ function App() {
     }
   },[puzzleGameStart])
 
+  const solveGameSlidingPuzzle = () => {
+    if(puzzleGameStart === true){
+      SetPuzzleCellIndex([0,1,2,3,4,5,6,7,8]);
+    }
+  }
+
   return (
     <>
       <Header onHeaderClick={ButtonClickHandler}/>
@@ -36,6 +42,7 @@ function App() {
         {(currentPage === "Sliding Puzzle") && 
           <SlidingPuzzle 
             startTheGame={startGameSlidingPuzzle} 
+            SolveTheGame={solveGameSlidingPuzzle}
             gameStatus={puzzleGameStart}
             imageLocationIndex={puzzleCellIndex} 
           />}
