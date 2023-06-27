@@ -7,12 +7,14 @@ The basic structure of this project:
   - Header
     - log
     - Navbar
+  - Footer
   - Home
     - Name
     - Score Board
   - Word Guess
   - Sliding Puzzle
   - Tetris
+  - Button (common components)
 
 ## Available Scripts
 
