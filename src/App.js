@@ -36,7 +36,8 @@ function App() {
         {(currentPage === "Sliding Puzzle") && 
           <SlidingPuzzle 
             startTheGame={startGameSlidingPuzzle} 
-            cellLocationIndex={puzzleCellIndex} 
+            gameStatus={puzzleGameStart}
+            imageLocationIndex={puzzleCellIndex} 
           />}
         {(currentPage === "Tetris") && <Tetris />}
         {(currentPage === "Word Guess") && <WordGuess />}

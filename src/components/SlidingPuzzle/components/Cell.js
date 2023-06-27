@@ -1,7 +1,7 @@
 
 const Cell = ({
   piece,
-  onClick
+  onClick,
 }) => {
   return (
     <div 

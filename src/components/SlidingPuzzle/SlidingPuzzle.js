@@ -5,7 +5,7 @@ import { chip0, chip1, chip2, chip3, chip4, chip5,
 
 const SlidingPuzzle = ({
   startTheGame,
-  cellLocationIndex,
+  imageLocationIndex,
   gameStatus
 }) => {
   const SHREK_PIECES = [
@@ -13,15 +13,15 @@ const SlidingPuzzle = ({
     chip6, chip7, chip8
   ]
 
-  const switchImage = (cellIndex) => {
-    alert(cellIndex)
+  const switchImage = (imageIndex) => {
+    alert(imageIndex)
     // useRef();
   }
 
   return(
     <div>
       <div className="main_container SlidingPuzzle_main_container">
-        {cellLocationIndex.map((index) => 
+        {imageLocationIndex.map((index) => 
           (<Cell key={index} 
             piece={SHREK_PIECES[index]}
             onClick = {() => switchImage(index)}
