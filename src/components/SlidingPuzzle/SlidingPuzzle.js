@@ -1,13 +1,16 @@
 import Cell from './components/Cell'
 import Button from '../Button'
-import { chip1, chip2, chip3, chip4, chip5, 
-  chip6, chip7, chip8, chip9} from '../../data/shrek'
+import { chip0, chip1, chip2, chip3, chip4, chip5, 
+  chip6, chip7, chip8} from '../../data/shrek'
 
-const SlidingPuzzle = () => {
-  const CELL_INDEX = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const SlidingPuzzle = ({
+  startTheGame,
+  cellLocationIndex,
+  gameStatus
+}) => {
   const SHREK_PIECES = [
-    chip1, chip2, chip3, chip4,chip5, 
-    chip6, chip7, chip8, chip9
+    chip0, chip1, chip2, chip3, chip4,chip5, 
+    chip6, chip7, chip8
   ]
 
   const switchImage = (cellIndex) => {
@@ -18,7 +21,7 @@ const SlidingPuzzle = () => {
   return(
     <div>
       <div className="main_container SlidingPuzzle_main_container">
-        {CELL_INDEX.map((index) => 
+        {cellLocationIndex.map((index) => 
           (<Cell key={index} 
             piece={SHREK_PIECES[index]}
             onClick = {() => switchImage(index)}
@@ -26,7 +29,7 @@ const SlidingPuzzle = () => {
         }
       </div>
       <div className='low_container'>
-        <Button>Start</Button>
+        <Button onClick={startTheGame}>Start</Button>
         <Button>Solve</Button>
       </div>
     </div>

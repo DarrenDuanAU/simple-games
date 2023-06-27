@@ -96,6 +96,9 @@
   height: 48px;
   width: 48px;
   background-color: #439CEF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {

@@ -1,4 +1,4 @@
-export const strs = [
+export const wordStrs = [
     'the fat cats',
     'larger frogs',
     'banana cakes',
