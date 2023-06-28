@@ -1,11 +1,13 @@
-import ScoreBoard from './components/ScoreBoard/ScoreBoard'
+import ScoreBoard from './components/ScoreBoard'
 
-const Home = () => (
+const Home = ({
+  score
+}) => (
   <div className='home'>
     <div>
     Please Choose a game from the Navbar!
     </div>
-    <ScoreBoard />
+    <ScoreBoard score={score}/>
   </div>
 )
 export default Home;

@@ -11,7 +11,7 @@ const SHREK_PIECES = [
 const SlidingPuzzle = ({
   startTheGame,
   resetTheGame,
-  solveTheGame,
+  // solveTheGame,
   onImageClick,
   imageIds,
 }) => {
@@ -22,14 +22,14 @@ const SlidingPuzzle = ({
         {imageIds.map((imageId,index) => 
           (<Cell key={index} 
             piece={SHREK_PIECES[imageId]}
-            onClick = {() => onImageClick(imageId,index)}
+            onClick = {() => onImageClick(index)}
             />) ) 
         }
       </div>
       <div className='low_container'>
         <Button onClick={startTheGame}>Start</Button>
         <Button onClick={resetTheGame}>Reset</Button>
-        <Button onClick={solveTheGame}>Solve</Button>
+        {/* <Button onClick={solveTheGame}>Solve</Button> */}
       </div>
     </div>
   )

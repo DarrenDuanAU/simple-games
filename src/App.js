@@ -26,7 +26,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState("Home")
   const [puzzleImageIds, SetPuzzleImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [puzzleGameStart, setPuzzleGameStart] = useState(false);
-
+  const [score, setScore] = useState(0);
   const ButtonClickHandler = (page) => {
     setCurrentPage(page)
   }
@@ -44,6 +44,13 @@ function App() {
     }
   },[puzzleGameStart])
 
+  useEffect(() => {
+    if ( puzzleGameStart === true &&
+      JSON.stringify(puzzleImageIds) === JSON.stringify([0,1,2,3,4,5,6,7,8]) ) {
+      setScore( prevState => prevState + 1 );
+    }
+  },[puzzleImageIds])
+
   const resetGameSlidingPuzzle = () => {
     if(puzzleGameStart === true){
       SetPuzzleImageIds([0,1,2,3,4,5,6,7,8]);
@@ -57,13 +64,11 @@ function App() {
     }
   }
 
-  const switchImage = (imageId, locationId) => {
+  const switchImage = (locationId) => {
     const locationChecks = PUZZLE_CLICK_MAP.find((item) => item.click === locationId)?.check 
-    // console.log(`${imageId}-${locationId}-${locationChecks}`)
     for( let i=0 ; i<locationChecks.length ; i++ ) {
-      const targetLocationId = locationChecks[i]
       if( puzzleImageIds[locationChecks[i]] === 8 ) {
-        // console.log(`${locationId} => ${targetLocationId}`);
+        const targetLocationId = locationChecks[i]
         SetPuzzleImageIds((prevState) => {
           return swapTwoElementsInArray([...prevState], locationId, targetLocationId)
         });
@@ -75,7 +80,7 @@ function App() {
     <>
       <Header onHeaderClick={ButtonClickHandler}/>
       <div className='page'>          
-        {(currentPage === "Home") && <Home />}
+        {(currentPage === "Home") && <Home score={score}/>}
         {(currentPage === "Sliding Puzzle") && 
           <SlidingPuzzle 
             startTheGame={startGameSlidingPuzzle} 

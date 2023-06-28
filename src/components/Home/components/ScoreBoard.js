@@ -1,7 +1,9 @@
-const ScoreBoard = () => {
+const ScoreBoard = ({
+  score
+}) => {
   return (
     <div>
-      Your score: 0
+      Your score: {score}
     </div>
   )
 }
