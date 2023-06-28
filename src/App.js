@@ -31,30 +31,26 @@ function App() {
     setCurrentPage(page)
   }
 
-
-
   // functions for Sliding Puzzles
   const startGameSlidingPuzzle = () => {
-    setPuzzleGameStart(true);
-  }
-
-  useEffect(() => {
-    if(puzzleGameStart === true){
+    if(puzzleGameStart === false) {
       SetPuzzleImageIds(shuffleArray([1,2,3,4,5,6,7,8,0]));
+      setPuzzleGameStart(true);
     }
-  },[puzzleGameStart])
+  }
 
   useEffect(() => {
     if ( puzzleGameStart === true &&
       JSON.stringify(puzzleImageIds) === JSON.stringify([0,1,2,3,4,5,6,7,8]) ) {
       setScore( prevState => prevState + 1 );
+      alert('Sliding Puzzle win!');
     }
-  },[puzzleImageIds])
+  },[puzzleImageIds, puzzleGameStart]);
 
   const resetGameSlidingPuzzle = () => {
     if(puzzleGameStart === true){
-      SetPuzzleImageIds([0,1,2,3,4,5,6,7,8]);
       setPuzzleGameStart(false)
+      SetPuzzleImageIds([0,1,2,3,4,5,6,7,8]);
     }
   }
 
@@ -83,6 +79,7 @@ function App() {
         {(currentPage === "Home") && <Home score={score}/>}
         {(currentPage === "Sliding Puzzle") && 
           <SlidingPuzzle 
+            gameStarted={puzzleGameStart}
             startTheGame={startGameSlidingPuzzle} 
             resetTheGame={resetGameSlidingPuzzle}
             solveTheGame={solveGameSlidingPuzzle}

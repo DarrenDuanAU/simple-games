@@ -9,9 +9,10 @@ const SHREK_PIECES = [
 ]
 
 const SlidingPuzzle = ({
+  gameStarted,
   startTheGame,
   resetTheGame,
-  // solveTheGame,
+  solveTheGame,
   onImageClick,
   imageIds,
 }) => {
@@ -27,9 +28,10 @@ const SlidingPuzzle = ({
         }
       </div>
       <div className='low_container'>
-        <Button onClick={startTheGame}>Start</Button>
-        <Button onClick={resetTheGame}>Reset</Button>
-        {/* <Button onClick={solveTheGame}>Solve</Button> */}
+        {gameStarted === false 
+        ? <Button onClick={startTheGame}>Start</Button> 
+        : <Button onClick={resetTheGame}>Reset</Button>}    
+        <Button onClick={solveTheGame}>Solve</Button>
       </div>
     </div>
   )
