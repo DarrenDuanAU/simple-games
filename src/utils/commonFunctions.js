@@ -7,3 +7,10 @@ export const shuffleArray = (array) => {
   }
   return array;
 }
+
+export const swapTwoElementsInArray = (array, firstIndex, secIndex) => {
+  let temp = array[firstIndex];
+  array[firstIndex] = array[secIndex];
+  array[secIndex] = temp;
+  return array;
+}
