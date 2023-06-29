@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 const WordGuess = () => {
   const CHIP_INDEX = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11]
-  const [currentWord, setCurrentWord] = useState("click button");
+  const [currentWord, setCurrentWord] = useState("CLICK 2START");
   return (
     <div>
       <div className="main_container WordGuess_main_container ">
