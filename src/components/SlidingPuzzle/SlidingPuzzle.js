@@ -29,8 +29,10 @@ const SlidingPuzzle = ({
       </div>
       <div className='low_container'>
         {gameStarted === false 
-        ? <Button onClick={startTheGame}>Start</Button> 
-        : <Button onClick={resetTheGame}>Reset</Button>}    
+          ? 
+          <Button onClick={startTheGame}>Start</Button> 
+          : 
+          <Button onClick={resetTheGame}>Reset</Button>}    
         <Button onClick={solveTheGame}>Solve</Button>
       </div>
     </div>

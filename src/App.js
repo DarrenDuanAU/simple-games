@@ -23,10 +23,11 @@ const PUZZLE_CLICK_MAP = [
 ]
 
 function App() {
+  const [score, setScore] = useState(0);
   const [currentPage, setCurrentPage] = useState("Home")
   const [puzzleImageIds, SetPuzzleImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [puzzleGameStart, setPuzzleGameStart] = useState(false);
-  const [score, setScore] = useState(0);
+
   const ButtonClickHandler = (page) => {
     setCurrentPage(page)
   }
@@ -86,7 +87,10 @@ function App() {
             onImageClick={switchImage}
             imageIds={puzzleImageIds} 
           />}
-        {(currentPage === "Tetris") && <Tetris />}
+        {(currentPage === "Tetris") && 
+        <Tetris 
+
+        />}
         {(currentPage === "Word Guess") && <WordGuess />}
       </div>
       <Footer />
