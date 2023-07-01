@@ -1,9 +1,13 @@
 const Chip = ({
+  character,
   index
 }) => {
   return (
     <div className="chip">
-      {index}
+      {character === "?" 
+      ? <input className="WordGuess_input"></input>
+      : character}
+      
     </div>
   )
 }

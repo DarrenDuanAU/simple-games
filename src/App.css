@@ -91,6 +91,12 @@
   width: 600px;
 }
 
+.WordGuess_input {
+  font-size:medium;
+  height: 20px;
+  width: 15px;
+}
+
 .chip{
   border:1px solid #000;
   height: 48px;
