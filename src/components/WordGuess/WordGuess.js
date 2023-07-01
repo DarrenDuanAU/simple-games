@@ -15,9 +15,9 @@ const WordGuess = () => {
       let i = 0;
       while ( i <3 ) {
         const markIndex = Math.floor( Math.random() * 12 );
-        console.log(markIndex, tempWord[markIndex])
+        // console.log(markIndex, tempWord[markIndex])
         if ( tempWord[markIndex]!== ' ' && tempWord[markIndex]!=='?'){
-          console.log('not a space');
+          // console.log('not a space');
           tempWord[markIndex]='?';
           i += 1;
         }
@@ -58,7 +58,7 @@ const WordGuess = () => {
               "Reset"
             }
           </Button>
-          {markedWord}
+          {/* {markedWord} */}
       </div>
     </div>
   )

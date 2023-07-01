@@ -5,7 +5,7 @@ const Chip = ({
   return (
     <div className="chip">
       {character === "?" 
-      ? <input className="WordGuess_input"></input>
+      ? <input className="WordGuess_input" maxLength={1}></input>
       : character}
       
     </div>
