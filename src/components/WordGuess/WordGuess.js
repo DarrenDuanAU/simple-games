@@ -47,7 +47,7 @@ const WordGuess = () => {
   return (
     <div>
       <div className="main_container WordGuess_main_container ">
-        { markedWord.split('').map((character ,index) => (<Chip key={index} index={index} character={character} />)) }
+        { markedWord.split('').map((character ,index) => (<Chip key={index} character={character} />)) }
       </div>
       <div className='low_container'>
           <Button onClick={resetTheGame}>
@@ -55,7 +55,7 @@ const WordGuess = () => {
             ? 
               "Start"
             : 
-              "Reset"
+              "Skip"
             }
           </Button>
           {/* {markedWord} */}

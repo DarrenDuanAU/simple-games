@@ -1,11 +1,12 @@
+import { useState } from "react";
 const Chip = ({
   character,
-  index
 }) => {
+  const [value, setValue]=useState('')
   return (
     <div className="chip">
       {character === "?" 
-      ? <input className="WordGuess_input" maxLength={1}></input>
+      ? <input className="WordGuess_input" value={value} onChange={(e) => setValue(e.target.value)} maxLength={1}></input>
       : character}
       
     </div>
