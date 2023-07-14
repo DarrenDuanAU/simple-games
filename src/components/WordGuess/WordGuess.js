@@ -29,19 +29,11 @@ const WordGuess = () => {
 
 
   const resetTheGame = () => {
-
-    const targetIndex = Math.floor(Math.random() * wordStrs.length) 
-    setCurrentWord((preState) => {
-      const targetStr = wordStrs[targetIndex]
-      if ( preState !== targetStr ) {
-        return targetStr;
-      }else {
-        if (targetIndex === 0) {
-          return wordStrs[1];
-        }
-        return wordStrs[targetIndex - 1];
-      }
-    })
+    let randomIndex = Math.floor(Math.random() * wordStrs.length) 
+    while ( wordStrs[randomIndex] === currentWord ){
+      randomIndex = Math.floor(Math.random() * wordStrs.length) 
+    }
+    setCurrentWord(wordStrs[randomIndex])
   }
 
   return (
