@@ -9,5 +9,6 @@ const Home = ({
     </div>
     <ScoreBoard score={score}/>
   </div>
+  
 )
 export default Home;

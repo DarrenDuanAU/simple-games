@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 const WordGuess = () => {
   const [currentWord, setCurrentWord] = useState("CLICK 2START");
   const [markedWord, setMarkedWord] = useState("CLICK 2START");
+  const [clickCounter, setClickCounter] = useState(0);
+
   
   useEffect(() => {
     if (currentWord === "CLICK 2START" ){
@@ -13,7 +15,7 @@ const WordGuess = () => {
     } else {
       let tempWord = currentWord.split('');
       let i = 0;
-      while ( i <3 ) {
+      while ( i < 3 ) {
         const markIndex = Math.floor( Math.random() * 12 );
         // console.log(markIndex, tempWord[markIndex])
         if ( tempWord[markIndex]!== ' ' && tempWord[markIndex]!=='?'){
@@ -28,21 +30,23 @@ const WordGuess = () => {
   },[currentWord]);
 
 
-  const resetTheGame = () => {
+  const updateWord = () => {
     let randomIndex = Math.floor(Math.random() * wordStrs.length) 
     while ( wordStrs[randomIndex] === currentWord ){
       randomIndex = Math.floor(Math.random() * wordStrs.length) 
     }
     setCurrentWord(wordStrs[randomIndex])
+    setClickCounter(preState => preState + 1)
   }
 
   return (
     <div>
       <div className="main_container WordGuess_main_container ">
-        { markedWord.split('').map((character ,index) => (<Chip key={index} character={character} />)) }
+        { markedWord.split('').map( (character ,index) =>  (<Chip key={`${clickCounter} - ${index}`} char={character} />)) }
+        
       </div>
       <div className='low_container'>
-          <Button onClick={resetTheGame}>
+          <Button onClick={updateWord}>
             {currentWord === "CLICK 2START" 
             ? 
               "Start"

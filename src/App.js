@@ -1,4 +1,5 @@
 import './App.css';
+import './input.css'
 import WordGuess from './components/WordGuess';
 import SlidingPuzzle from './components/SlidingPuzzle';
 import Tetris from './components/Tetris';

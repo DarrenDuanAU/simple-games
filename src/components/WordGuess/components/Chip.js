@@ -1,16 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Chip = ({
-  character,
-  input
+  char,
+  test
 }) => {
+  const [value, setValue] = useState('')
+
+  useEffect(() => {
+    console.log("rereder!")
+    setValue('')
+  },[])
 
   return (
-    <div className="chip">
-      {character === "?" 
-      ? <input className="WordGuess_input" value={input} maxLength={1}></input>
-      : character}
-      
-    </div>
+    <>
+      <div className="chip">
+        { char === '?'
+        ? <input className="WordGuess_input" value={value} onChange={(e) => setValue(e.target.value)} maxLength={1}></input>
+        : char}
+      </div>
+      <div>
+        {test}
+      </div>
+    </>
   )
 }
 export default Chip;
