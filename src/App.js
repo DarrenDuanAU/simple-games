@@ -1,4 +1,4 @@
-import './App.css';
+import './style/App.css';
 import './input.css'
 import WordGuess from './components/WordGuess';
 import SlidingPuzzle from './components/SlidingPuzzle';

@@ -1,0 +1,35 @@
+.main_container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #eee;
+  border: #000 blanchedalmond;
+  background-color: yellow;
+}
+
+.WordGuess_main_container {
+  height: 50px;
+  width: 600px;
+}
+
+.WordGuess_input {
+  font-size:medium;
+  height: 20px;
+  width: 15px;
+}
+
+.chip{
+  border:1px solid #000;
+  height: 48px;
+  width: 48px;
+  background-color: #439CEF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.low_container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 10px;
+}

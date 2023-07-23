@@ -1,0 +1,15 @@
+.Tetris_main_container {
+  height: 450px;
+  width: 300px;
+}
+
+.block {
+  border:1px solid #000;
+  height: 28px;
+  width: 28px;
+  background-color: #439CEF;
+}
+
+.block_active {
+  background-color: red;
+}

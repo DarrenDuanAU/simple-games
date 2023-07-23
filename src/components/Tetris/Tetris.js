@@ -1,3 +1,4 @@
+import './style.css'
 import Block from './components/Block'
 import Button from '../Button'
 const Tetris = () =>{

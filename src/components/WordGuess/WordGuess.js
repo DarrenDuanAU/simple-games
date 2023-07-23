@@ -2,6 +2,7 @@ import Chip from './components/Chip'
 import Button from '../Button/Button'
 import { wordStrs } from '../../data/wordStrs'
 import { useEffect, useState } from 'react'
+import './style.css'
 
 const WordGuess = () => {
   const [currentWord, setCurrentWord] = useState("CLICK 2START");
