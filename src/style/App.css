@@ -3,6 +3,8 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 600;
 }
 
 .log {
@@ -12,7 +14,6 @@
 .button {
   margin: 10px;
   padding: 8px 10px;
-  font-weight: 600;
   cursor: pointer;
   border-radius: 20px;
   border: 1px solid #000;
@@ -22,7 +23,7 @@
 
 .button:hover {
   border-radius: 6px;
-  background-color: #439CEF;
+  background-color: #fff;
 }
 
 .button:active {
@@ -36,7 +37,7 @@
   width: 100%;
   height: 60px;
   /* background-color: #439CEF; */
-  background-color: #202125;
+  background-color: #439CEF;
 }
 
 .page {
@@ -44,7 +45,7 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 140px);
-  background-color: #37393f;
+  background-color: #eee;
 }
 
 .home {
@@ -60,5 +61,5 @@
   align-items: center;
   width: 100%;
   height: 80px;
-  background-color: #202125;
+  background-color: #303137;
 }
