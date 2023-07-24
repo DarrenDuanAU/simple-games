@@ -1,6 +1,9 @@
 import { chip0, chip1, chip2, chip3, chip4, chip5, 
   chip6, chip7, chip8} from '../../data/shrek'
 
+export const OriginImageIds = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+
 export const SHREK_PIECES = [
   chip0, chip1, chip2, chip3, chip4,chip5, 
   chip6, chip7, chip8

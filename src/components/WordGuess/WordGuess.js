@@ -76,7 +76,7 @@ const WordGuess = () => {
               "Next"
             }
           </Button>
-          {inputIds.map((item,index) => <div key={index}>{item}</div>)}
+          {/* {inputIds.map((item,index) => <div key={index}>{item}</div>)} */}
       </div>
     </div>
   )

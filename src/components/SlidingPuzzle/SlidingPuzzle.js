@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './style.css'
 import Cell from './components/Cell'
 import Button from '../Button'
@@ -10,34 +10,33 @@ import { SHREK_PIECES,PUZZLE_CLICK_MAP } from './constants'
 const SlidingPuzzle = () => {
   const [imageIds, SetImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [gameStarted, setGameStarted] = useState(false);
+  const firstUpdate = useRef(true);
 
   const startTheGame = () => {
-    if(gameStarted === false) {
-      console.log('start the game')
-      SetImageIds(shuffleArray([1,2,3,4,5,6,7,8,0]));
-      setGameStarted(true);
-    }
+    setGameStarted(prevState => !prevState);
   }
 
   useEffect(() => {
-    if ( gameStarted === true &&
-      JSON.stringify(imageIds) === JSON.stringify([0,1,2,3,4,5,6,7,8]) ) {
-      alert('Sliding Puzzle win!');
+    const OriginImageIds = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    if ( gameStarted === true){
+      SetImageIds(shuffleArray(OriginImageIds));
+    } else {
+      SetImageIds(OriginImageIds);
     }
-  },[imageIds, gameStarted]);
+  },[gameStarted]);
 
-  const resetTheGame = () => {
-    if(gameStarted === true){
-      setGameStarted(false)
-      SetImageIds([0,1,2,3,4,5,6,7,8]);
+  useEffect(() => {
+    if (firstUpdate.current) {
+      console.log('first time')
+      firstUpdate.current = false;
+      return;
     }
-  }
+    //  else if (firstUpdate.current === false && JSON.stringify(imageIds) === JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8])) {
+    //   alert('Sliding Puzzle win!');
+    // }
+    console.log('first time 2')
+  },[imageIds]);
 
-  const solveTheGame= () => {
-    if (gameStarted=== true) {
-      SetImageIds([0,1,2,3,4,5,6,7,8]);
-    }
-  }
 
   const switchImage = (locationId) => {
     const locationChecks = PUZZLE_CLICK_MAP.find((item) => item.click === locationId)?.check 
@@ -67,8 +66,7 @@ const SlidingPuzzle = () => {
           ? 
           <Button onClick={startTheGame}>Start</Button> 
           : 
-          <Button onClick={resetTheGame}>Reset</Button>}     
-        <Button onClick={solveTheGame}>Solve</Button>
+          <Button onClick={startTheGame}>Solve</Button>}     
       </div>
     </div>
   )

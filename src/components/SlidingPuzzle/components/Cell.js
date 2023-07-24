@@ -10,8 +10,6 @@ const Cell = ({
     >
       <img 
         src={piece}
-        width={120} 
-        height={120} 
         alt="shrek_pieces"
       >
       </img>

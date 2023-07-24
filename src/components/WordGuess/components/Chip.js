@@ -9,7 +9,7 @@ const Chip = ({
     <>
       <div className="chip">
         { char === '?'
-        ? <input className="WordGuess_input" onChange={onChange} id={index} maxLength={1}></input>
+        ? <input className="WordGuess_input" onChange={onChange} id={index} maxLength={1} autoComplete="off" ></input>
         : char}
       </div>
     </>

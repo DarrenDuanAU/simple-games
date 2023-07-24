@@ -18,6 +18,10 @@
   background-color: #eee;
 }
 
+img {
+  max-width: 118px;
+}
+
 .low_container {
   display: flex;
   justify-content: space-around;
