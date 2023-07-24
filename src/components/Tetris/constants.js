@@ -1,7 +1,7 @@
-export const BLOCK_DATA = [];
+export const SQUARES_DATA = [];
 for( let i=0; i< 15; i++){
   for( let j=0; j< 10; j++){
-    BLOCK_DATA.push({coor:`${i}-${j}`, active:false});
+    SQUARES_DATA.push({coor:`${i}-${j}`, active:false});
   }
 }
 
