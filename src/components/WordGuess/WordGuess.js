@@ -4,7 +4,9 @@ import { wordStrs } from '../../data/wordStrs'
 import { useEffect, useState } from 'react'
 import './style.css'
 
-const WordGuess = () => {
+const WordGuess = ({
+  setScore
+}) => {
   const [currentWord, setCurrentWord] = useState("CLICK 2START");
   const [markedWord, setMarkedWord] = useState("CLICK 2START");
   const [clickCounter, setClickCounter] = useState(0);
@@ -14,8 +16,9 @@ const WordGuess = () => {
     console.log('useEffect inputId', inputIds)
     if(inputIds.length === 0) {
       alert('win')
+      setScore(prevState => prevState + 1)
     }
-  }, [inputIds])
+  }, [inputIds,setScore])
 
 
   useEffect(() => {

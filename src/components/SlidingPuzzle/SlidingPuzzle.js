@@ -7,10 +7,13 @@ import { SHREK_PIECES,PUZZLE_CLICK_MAP } from './constants'
 
 
 
-const SlidingPuzzle = () => {
+const SlidingPuzzle = ({
+  setScore
+}) => {
+  const firstUpdate = useRef(0);
   const [imageIds, SetImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [gameStarted, setGameStarted] = useState(false);
-  const firstUpdate = useRef(true);
+  const [mask, setMask] = useState('mask')
 
   const startTheGame = () => {
     setGameStarted(prevState => !prevState);
@@ -20,22 +23,24 @@ const SlidingPuzzle = () => {
     const OriginImageIds = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     if ( gameStarted === true){
       SetImageIds(shuffleArray(OriginImageIds));
+      setMask('mask mask-active')
     } else {
       SetImageIds(OriginImageIds);
+      setMask('mask')
     }
   },[gameStarted]);
 
   useEffect(() => {
-    if (firstUpdate.current) {
-      console.log('first time')
-      firstUpdate.current = false;
-      return;
+    //console.log('in useEffect')
+    if (firstUpdate.current >=2 &&
+      JSON.stringify(imageIds) === JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8])){
+        alert('win')
+        setScore(prevState => prevState + 1)
+    } else {
+      firstUpdate.current = firstUpdate.current + 1
+      //console.log('in initial2',imageIds, firstUpdate.current)
     }
-    //  else if (firstUpdate.current === false && JSON.stringify(imageIds) === JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8])) {
-    //   alert('Sliding Puzzle win!');
-    // }
-    console.log('first time 2')
-  },[imageIds]);
+  },[imageIds,setScore]);
 
 
   const switchImage = (locationId) => {
@@ -53,6 +58,7 @@ const SlidingPuzzle = () => {
   return(
     <div>
       <div className="main_container SlidingPuzzle_main_container">
+        <div className={mask}></div>
         {imageIds.map((imageId,index) => 
           (<Cell 
             key={index} 
@@ -68,6 +74,7 @@ const SlidingPuzzle = () => {
           : 
           <Button onClick={startTheGame}>Solve</Button>}     
       </div>
+      {firstUpdate.current}
     </div>
   )
 }

@@ -4,11 +4,24 @@
   background-color: #eee;
   border: #000 blanchedalmond;
   background-color: yellow;
+  position: relative;
 }
 
 .SlidingPuzzle_main_container {
   height: 360px;
   width: 360px;
+}
+
+.mask {
+  height: 360px;
+  width: 360px;
+  position: absolute;
+  background-color: #000;
+  opacity: 0.1;
+}
+.mask-active {
+  height: 0px;
+  width: 0px;
 }
 
 .cell {

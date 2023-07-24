@@ -23,9 +23,9 @@ function App() {
       <Header onHeaderClick={ButtonClickHandler}/>
       <div className='page'>          
         {(currentPage === "Home") && <Home score={score}/>}
-        {(currentPage === "Sliding Puzzle") && <SlidingPuzzle />}
+        {(currentPage === "Sliding Puzzle") && <SlidingPuzzle setScore={setScore} />}
         {(currentPage === "Tetris") && <Tetris />}
-        {(currentPage === "Word Guess") && <WordGuess />}
+        {(currentPage === "Word Guess") && <WordGuess setScore={setScore} />}
       </div>
       <Footer />
     </>
