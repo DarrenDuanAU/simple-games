@@ -1,34 +1,40 @@
 import './style.css'
+import { useState } from 'react'
 import Block from './components/Block'
 import Button from '../Button'
+import { BLOCK_DATA, START_COOR } from './constants'
 const Tetris = () =>{
-  const BLOCK_INDEX = [];
-  for( let i=0; i< 15; i++){
-    for( let j=0; j< 10; j++){
-      BLOCK_INDEX.push(`${i}-${j}`);
-    }
-  }
-  
+  const [blocks, setBlocks] = useState(BLOCK_DATA)
+
   const startTetris = () => {
     alert("game start")
   }
 
-  const TetrisMoveLeft = () => {
+  const changeBlockState = (coor,active) => {
+    const temp_list = BLOCK_DATA.map((item) => {
+      if (item.coor === coor ) {
+        return {...item, active: active}
+      } else {
+        return item;
+      }
+    });
+
+    console.log(temp_list)
+    setBlocks(temp_list)
   }
-
-
   
   return (
     <div>
       <div className="main_container Tetris_main_container">
-        {BLOCK_INDEX.map((index) => (<Block key={index} index={index} />)) 
+        {blocks.map((item) => (<Block key={item.coor} active={item.active} coor={item.coor} />)) 
         }
       </div>
       <div className='low_container'>
         <Button onClick={startTetris}>Start</Button>
-        <Button onClick={TetrisMoveLeft}>L</Button>
-        <Button>D</Button>
-        <Button>R</Button>
+        <Button >L</Button>
+        <Button onClick={()=>changeBlockState('1-1',true)}>test</Button>
+
+
       </div>
     </div>
 

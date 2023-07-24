@@ -1,9 +1,10 @@
 const Block = ({
-  index
+  coor,
+  active
 }) => {
   return (
-    <div className="block">
-      {index}
+    <div className={active ? 'block block_active':'block'}>
+      {coor}
     </div>
   )
 }
