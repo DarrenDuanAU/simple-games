@@ -5,4 +5,4 @@ for( let i=0; i< 15; i++){
   }
 }
 
-export const START_COOR = '0-4'
+export const START_BLOCK_COOR = [['0-4'],['0-4','1-4'],['0-4','0-5','1-4','1-5']]
