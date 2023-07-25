@@ -1,8 +1,18 @@
 import ScoreBoard from './components/ScoreBoard'
+import { useEffect } from 'react'
 
 const Home = ({
-  score
-}) => (
+  score,
+  intervalIds
+}) => {
+  //clean up all intervals
+  useEffect(() => {
+    intervalIds.current.forEach((intervalId) => {
+      clearInterval(intervalId)
+    })
+  },[intervalIds])
+
+  return (
   <div className='home'>
     <div>
     Please Choose a game from the Navbar!
@@ -11,4 +21,6 @@ const Home = ({
   </div>
   
 )
+
+}
 export default Home;
