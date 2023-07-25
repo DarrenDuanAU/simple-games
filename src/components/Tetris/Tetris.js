@@ -1,37 +1,37 @@
 import './style.css'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Square from './components/Square'
 import Button from '../Button'
 import { SQUARES_DATA, START_BLOCK_COOR } from './constants'
+import { blockHandler, reachedBottom } from './functions'
 const Tetris = () =>{
   const [squares, setSquares] = useState(SQUARES_DATA);
-  // const preSquares = useRef(SQUARES_DATA);
   const [block, setBlock] = useState([])
-  // const preBlock = useRef('')
+  const preBlock = useRef(['',''])
+
 
   const startTetris = () => {
     alert("game start")
   }
 
-  // useEffect(() => {
-  //   preSquares.current = squares;
-  // },[squares])
-
-  // useEffect(() => {
-  //   preBlock.current = blockPre (block);
-  //   console.log('preBlock',preBlock.current)
-  // },[block])
-
-
+  // record the prevState of block
   useEffect(() => {
-    
+    if(reachedBottom(block)){
+      console.log('reachedBottom')
+    }
+    preBlock.current.shift()
+    preBlock.current.push(block)
+  },[block])
+
+  // update the squares when block changed
+  useEffect(() => {
     setSquares( (prevSquares) =>{
-      const preBlock = blockPre(block)
+      const removeBlock = preBlock.current[0]
       const tempSquares = [...prevSquares]
       const result = tempSquares.map((square) => {
         if (block.includes(square.coor) ) {
           return {...square, active: true}
-        } if (preBlock.includes(square.coor) ) {
+        } if (removeBlock.includes(square.coor) ) {
           return {...square, active: false}
         } 
         else {
@@ -42,25 +42,6 @@ const Tetris = () =>{
     })
   },[block])
 
-  const blockDropDown = (coors) => {
-    const result = coors.map((coor) => {
-      const realCoor = coor.split('-').map((string) => Number(string))
-      return (realCoor[0]+1)+ '-' +realCoor[1]
-    })
-    // console.log('blockDropDown',result)
-    return result
-  }
-
-  const blockPre = (coors) => {
-    const result = coors.map((coor) => {
-      const realCoor = coor.split('-').map((string) => Number(string))
-      return (realCoor[0]-1)+ '-' +realCoor[1]
-    })
-    // console.log('blockPre',result)
-    return result
-  }
-
-
 
   const generateNewBlock = () => {
     const BlockCoor = START_BLOCK_COOR[Math.floor(Math.random()*3)]
@@ -69,10 +50,22 @@ const Tetris = () =>{
       // console.log('This will run every second!');
       setBlock( prevBlock => {
         const temp = [...prevBlock]
-        return blockDropDown(temp)
+        return blockHandler(temp,'down')
       } )
     }, 1000);
     return () => clearInterval(interval);
+  }
+
+  const moveLeft = () => {
+    setBlock( prevBlock => blockHandler(prevBlock,'left') )
+  }
+  
+  const moveRight = () => {
+    setBlock( prevBlock => blockHandler(prevBlock,'right') )
+  }
+
+  const moveDown = () => {
+    setBlock( prevBlock => blockHandler(prevBlock,'down') )
   }
 
 
@@ -85,12 +78,11 @@ const Tetris = () =>{
       </div>
       <div className='low_container'>
         <Button onClick={startTetris}>Start</Button>
-        <Button >L</Button>
+        <Button onClick={moveLeft} >L</Button>
+        <Button onClick={moveDown} >D</Button>
+        <Button onClick={moveRight} >R</Button>
         {/* <Button onClick={()=>changeBlockState(['0-0'],['0-1'])}>test</Button> */}
         <Button onClick={generateNewBlock}>New Block</Button>
-        <Button onClick={() => blockDropDown(['0-1','1-1'])}>dropDown </Button>
-
-
       </div>
     </div>
 
