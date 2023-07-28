@@ -2,15 +2,21 @@ import './style.css'
 import { useEffect, useRef, useState } from 'react'
 import Square from './components/Square'
 import Button from '../Button'
-import { SQUARES_DATA, START_BLOCK_COOR, MAX_I, MAX_J } from './constants'
-// import { blockHandler } from './functions'
+import { SQUARES_DATA, START_BLOCK_COOR, MAX_I } from './constants'
+import { blockHandler, getNeighbor, toNumberCoors, fondActiveRow, deactivateRows } from './functions'
 const Tetris = ({
   intervalIds
 }) =>{
   const [squares, setSquares] = useState(SQUARES_DATA);
   const [block, setBlock] = useState([])
   const [bottom, setBottom] = useState(false);
+  const [gameStarted, setGameStarted] =useState(false);
+  const [deactivating, setDeactivating] = useState(false)
   const preBlock = useRef(['',''])
+
+/***************************************************************
+                          Hooks
+***************************************************************/
 
   //clean up all intervals
   useEffect(() => {
@@ -19,21 +25,54 @@ const Tetris = ({
     })
   },[intervalIds])
 
+  // save the prevState of block
   useEffect(() => {
     preBlock.current.shift()
     preBlock.current.push(block)
   },[block])
 
+  // add keyboard event listener
   useEffect(() => {
-    if(bottom){
-      console.log('reachedBottom')
-      preBlock.current.shift()
-      preBlock.current.push('')
-      const BlockCoor = START_BLOCK_COOR[Math.floor(Math.random()*3)]
-      setBottom(false)
-      setBlock(BlockCoor)
+    window.addEventListener('keydown', handleKeyPress);
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []); 
+
+  useEffect(() => {
+    if(deactivating){
+      setSquares( prevSquares => {
+        const tempSquares = [...prevSquares]
+        const activeRows = fondActiveRow(tempSquares)
+        console.log('input')
+        console.log(tempSquares)
+        return deactivateRows(activeRows,tempSquares)
+      })
+      setDeactivating(false)
     }
-  },[bottom])
+  },[deactivating])
+
+  // every time the block reach the bottom generate a new block
+  useEffect(() => {
+    if(bottom === true){
+      const numberCoors = toNumberCoors(preBlock.current[0])
+      if (numberCoors[0][0] <2) {
+        alert('game over!')
+        intervalIds.current.forEach((intervalId) => {
+          clearInterval(intervalId)
+        })
+      } else {
+        console.log('reachedBottom')
+        preBlock.current.shift()
+        preBlock.current.push('')
+        const BlockCoor = START_BLOCK_COOR[Math.floor(Math.random()*3)]
+
+        setDeactivating(true)
+        setBottom(false)
+        setBlock(BlockCoor)
+      }
+    }
+  },[bottom,intervalIds,squares])
 
   // update the squares when block changed
   useEffect(() => {
@@ -57,7 +96,7 @@ const Tetris = ({
     
   },[block])
 
-
+  //check the whether the block reach bottom when everytime block move
   useEffect(()=> { 
     block.forEach((coor) => {
       const numberCoor = coor.split('-').map((string) => Number(string))
@@ -67,6 +106,7 @@ const Tetris = ({
       } 
     })
     let blockBottom;
+    // blockBottom = getNeighbor(block,'down')
     if (block.length === 1) {
       blockBottom = block; 
     } else {
@@ -81,30 +121,21 @@ const Tetris = ({
 
   },[block])
 
-
-  const blockHandler = (coors, direct) => {
-    let valid = true
-    const result = coors.map((coor) => {
-      const numberCoor = coor.split('-').map((string) => Number(string))
-      if ( direct ==='down' && numberCoor[0] < MAX_I - 1){
-        return (numberCoor[0] + 1) + '-' + numberCoor[1]
-  
-      } else if ( direct==='left' &&  numberCoor[1] > 0 ){
-        return numberCoor[0] + '-' + (numberCoor[1] - 1)
-  
-      } else if ( direct === 'right' && numberCoor[1] <MAX_J - 1){
-        return numberCoor[0] + '-' + (numberCoor[1] + 1)
-  
-      } else {
-        valid = false
-        return coor
-      }
-    })
-    if (! valid) {
-      return coors
-    }
-    return result
+/***************************************************************
+                          Functions
+***************************************************************/
+ 
+ 
+const handleKeyPress = (event) => {
+  console.log(`key was pressed! ${event.key}`);
+  if (event.key === 'ArrowDown'){
+    moveBlock('down')
+  } else if (event.key === 'ArrowLeft'){
+    moveBlock('left')
+  } else if (event.key === 'ArrowRight'){
+    moveBlock('right')
   }
+};
 
   const squareActive = (coor) => {
     let active = false
@@ -116,7 +147,8 @@ const Tetris = ({
     return active
   }
 
-  const generateNewBlock = () => {
+  const startGame = () => {
+    setGameStarted(true)
     const BlockCoor = START_BLOCK_COOR[Math.floor(Math.random()*3)]
     setBlock(BlockCoor)
     const interval = setInterval(() => {
@@ -127,24 +159,38 @@ const Tetris = ({
       } )
     }, 1000);
     intervalIds.current.push(interval)
-    console.log('intervalIds',intervalIds)
     // return () => clearInterval(interval);
   }
 
-  const moveLeft = () => {
-    setBlock( prevBlock => blockHandler(prevBlock,'left') )
+  const reStartGame = () => {
+    intervalIds.current.forEach((intervalId) => {
+      clearInterval(intervalId)
+     })
+     setSquares(SQUARES_DATA)
+     preBlock.current = ['','']
+     startGame()
   }
 
-  const moveRight = () => {
-    setBlock( prevBlock => blockHandler(prevBlock,'right') )
+  const moveBlock = (direct) => {
+
+    setBlock( prevBlock =>{
+      let valid = true
+      if (direct !=='down') {
+        const neighbor = getNeighbor(prevBlock,direct)
+        neighbor.forEach((coor) => {
+          if (squareActive(coor)) {
+            valid = false
+          }
+        })
+        if (! valid) {
+          return prevBlock
+        }
+      }
+      return blockHandler(prevBlock,direct)
+    })
+    
   }
 
-  const moveDown = () => {
-    setBlock( prevBlock => blockHandler(prevBlock,'down') )
-  }
-
-
-  
   return (
     <div>
       <div className="main_container Tetris_main_container">
@@ -152,11 +198,13 @@ const Tetris = ({
         }
       </div>
       <div className='low_container'>
-        <Button onClick={generateNewBlock}>Start</Button>
-        <Button onClick={moveLeft} >L</Button>
-        <Button onClick={moveDown} >D</Button>
-        <Button onClick={moveRight} >R</Button> 
-         {/* <Button onClick={()=>changeBlockState(['0-0'],['0-1'])}>test</Button> */}
+        {gameStarted 
+        ? <Button onClick={reStartGame}>Restart</Button>
+        : <Button onClick={startGame}>Start</Button>}
+        <Button onClick={() => moveBlock('left')} >L</Button>
+        <Button onClick={() => moveBlock('down')} >D</Button>
+        <Button onClick={() => moveBlock('right')} >R</Button> 
+        {/* <Button onClick={() => getNeighbor(['1-2','2-2','1-3','2-3'],'down')}>test</Button> */}
       </div>
     </div>
 

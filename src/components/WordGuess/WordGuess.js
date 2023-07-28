@@ -21,7 +21,6 @@ const WordGuess = ({
   },[intervalIds])
 
   useEffect(() => {
-    console.log('useEffect inputId', inputIds)
     if(inputIds.length === 0) {
       alert('win')
       setScore(prevState => prevState + 1)
@@ -62,7 +61,7 @@ const WordGuess = ({
   const checkAnswer = (e) => {
     const chipId = Number(e.target.id);
     const chipValue = e.target.value;
-    console.log(chipId, chipValue);
+    // console.log(chipId, chipValue);
 
     if ( chipValue === '') {
       setInputIds(preState => [...preState, chipId])
