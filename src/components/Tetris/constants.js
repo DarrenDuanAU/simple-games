@@ -1,6 +1,7 @@
 export const MAX_Y = 15
 export const MAX_X = 10
 
+export const DEF_CHIP_THEME_CODE = 0
 export const CHIP_THEME = {
   0: {color: 'blue'},
   1: {color: 'grey'}
