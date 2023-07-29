@@ -8,19 +8,11 @@ import { SHREK_PIECES,PUZZLE_CLICK_MAP } from './constants'
 
 const SlidingPuzzle = ({
   setScore,
-  intervalIds
 }) => {
   const firstUpdate = useRef(0);
   const [imageIds, SetImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
   const [gameStarted, setGameStarted] = useState(false);
   const [mask, setMask] = useState('mask')
-
-  //clean up all intervals
-  useEffect(() => {
-    intervalIds.current.forEach((intervalId) => {
-      clearInterval(intervalId)
-    })
-  },[intervalIds])
 
   const startTheGame = () => {
     setGameStarted(prevState => !prevState);
@@ -64,7 +56,7 @@ const SlidingPuzzle = ({
 
   return(
     <div>
-      <div className="main_container SlidingPuzzle_main_container">
+      <div className="SlidingPuzzle_main_container">
         <div className={mask}></div>
         {imageIds.map((imageId,index) => 
           (<Cell 

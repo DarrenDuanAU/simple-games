@@ -1,6 +1,6 @@
 import { CHIP_THEME } from "../constants";
 
-const Square = ({
+const Block = ({
   coor,
   themeCode
 }) => {
@@ -10,4 +10,4 @@ const Square = ({
     </div>
   )
 }
-export default Square;
+export default Block;

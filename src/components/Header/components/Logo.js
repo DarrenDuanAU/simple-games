@@ -1,5 +1,4 @@
 import logo from '../../../assets/logo.png';
-// import logo from '../../../assets/overwatch.png';
 const Logo = () => (
   <div className='log'>
     <img 

@@ -1,16 +1,16 @@
-export const MAX_I = 15
-export const MAX_J = 10
+export const MAX_Y = 15
+export const MAX_X = 10
 
-export const SQUARES_DATA = [];
-for( let i=0; i< MAX_I; i++){
-  for( let j=0; j< MAX_J; j++){
-    SQUARES_DATA.push({coor:`${i}-${j}`, active:false});
-  }
+export const CHIP_THEME = {
+  0: {color: 'blue'},
+  1: {color: 'grey'}
 }
 
+
+export const SQUARES_DATA = new Array(MAX_Y).fill(new Array(MAX_X).fill(0))
+
 export const START_BLOCK_COOR = [
-  ['0-4'],
-  ['0-4','1-4'],
-  ['0-4','0-5','1-4','1-5'],
+  [[4,MAX_Y-1]],
+  [[4,MAX_Y-1],[4,MAX_Y-2]]
 ]
 
