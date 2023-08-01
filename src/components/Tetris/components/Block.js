@@ -5,7 +5,7 @@ const Block = ({
   themeCode
 }) => {
   return (
-    <div className={`square square_${CHIP_THEME[themeCode].color}`}>
+    <div className={`block block_${CHIP_THEME[themeCode].color}`}>
       {coor}
     </div>
   )

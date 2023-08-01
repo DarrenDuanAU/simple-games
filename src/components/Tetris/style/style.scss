@@ -56,11 +56,13 @@ $squreHeight: 30px;
   border:1px solid #000;
   height: $squreHeight;
   width: $squreWidth;
-  /* background-color: red; */
-  position: relative;
 }
 
-.block_active {
+.block_blue {
+  background-color: rgba(0,0,0,0.01)
+}
+
+.block_grey {
   background-color: #303137;
 }
 
