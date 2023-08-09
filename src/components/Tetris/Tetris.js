@@ -1,15 +1,21 @@
 import './style/style.css'
 import { useEffect, useState, useRef } from 'react'
-import Square from './components/Square'
-import Block from './components/Block'
+
+// import Square from './components/Square'
+// import Block from './components/Block'
+
+import SquareLayer from './components/SquareLayer'
+import BlockLayer from './components/BlockLayer'
+
 import Button from '../Button'
 import { INIT_DATA, 
   DEF_CHIP_THEME_CODE, 
-  START_BLOCK_COOR } from './constants'
+  START_BLOCK_COOR, 
+  MAX_X} from './constants'
 import { randomPick, 
   getColoredCoorTheme, 
   BlockHandler,
-  getColoredCoors } from './functions'
+  reeachedBoundaryOn } from './functions'
 
 const Tetris = () =>{
   const [status, setStatus] = useState('notStart')
@@ -19,12 +25,12 @@ const Tetris = () =>{
   const prevSquaresRef = useRef(squares)
   const intervalIds = useRef([])
 
-  useEffect(()=>{
-    document.addEventListener('keydown', (event) =>{
-      console.log(`${event.key.slice(5).toLowerCase()}`);
-      moveBlock(`${event.key.slice(5).toLowerCase()}`)
-    })
-  },[])
+  // useEffect(()=>{
+  //   document.addEventListener('keydown', (event) =>{
+  //     console.log(`${event.key.slice(5).toLowerCase()}`);
+  //     moveBlock(`${event.key.slice(5).toLowerCase()}`)
+  //   })
+  // },[])
 
   useEffect(()=> {
     prevBlocksRef.current=blocks
@@ -65,8 +71,9 @@ const Tetris = () =>{
         intervalIds.current.push(intervalId)
         break
       case 'collision':
+        // console.log('collision')
         intervalIds.current.forEach(intervalId => clearInterval(intervalId))
-        const coloredCoors = getColoredCoorTheme(prevBlocksRef.current)
+        const coloredCoors = getColoredCoorTheme([...prevBlocksRef.current])
         setBlocks(INIT_DATA)
         setSquares( prevState => {
           const temp = [...prevState]
@@ -80,6 +87,38 @@ const Tetris = () =>{
             })
           })
         })
+        setStatus('removeRows')
+        break
+
+      case 'removeRows':
+        console.log('removeRows')  
+        const currentSquare = [...prevSquaresRef.current]
+        const coloredRowIndexList = []
+        currentSquare.forEach((row, y) => {
+          let counter = 0
+          row.forEach((colorCode) => {
+            if (colorCode !== DEF_CHIP_THEME_CODE) {
+              counter += 1
+            }
+          })
+          if ( counter === MAX_X) {
+            coloredRowIndexList.push(y)
+          }
+        })
+        const coloredRowIndexListReverse = coloredRowIndexList.reverse()
+        console.log('row to remove',coloredRowIndexListReverse)
+        if (coloredRowIndexListReverse.length !== 0) {
+          setSquares(prevSquares => {
+            const temp = [...prevSquares]
+            coloredRowIndexListReverse.forEach((rowIndex) => {
+              temp.splice(rowIndex,1)
+              const defColorArray = new Array(MAX_X).fill(DEF_CHIP_THEME_CODE);
+              temp.push(defColorArray)
+            })
+            return temp
+          })
+        }
+        setStatus('newBlock')
         break
 
       default:
@@ -109,24 +148,35 @@ const Tetris = () =>{
   },[blocks])
 
   useEffect(()=>{
-    let hasCollision = false;
-    const coors = getColoredCoors(blocks)
-    console.log(coors)
-    
-    // const coloredCoors = getColoredCoorTheme(blockNextPosition)
-    // prevSquaresRef.current.forEach((row, y) => {
-    //   row.forEach((colorCode, x) => {
-    //     if(x in coloredCoors 
-    //       && y in coloredCoors[x] 
-    //       && colorCode !== DEF_CHIP_THEME_CODE) {
-    //         hasCollision = true
-    //     }
-    //   })
-    // })
-    // if (hasCollision) {
-    //   setStatus('collision')
-    //   return
-    // }
+    if (blocks !== INIT_DATA) {
+
+      
+      // console.log(reeachedBoundary([...blocks]))
+      
+
+      let hasCollision = false;
+      const nextBlock = BlockHandler([...blocks], 'down')
+      const blockColoredDict = getColoredCoorTheme(nextBlock)
+  
+      const currentSquare = [...prevSquaresRef.current]
+      currentSquare.forEach((row, y) => {
+        row.forEach((colorCode, x) => {
+          if ( x in blockColoredDict 
+            && y in blockColoredDict[x] 
+            && blockColoredDict[x][y] !== DEF_CHIP_THEME_CODE 
+            && colorCode !== DEF_CHIP_THEME_CODE ){
+              
+            hasCollision = true
+          }
+        })
+      })
+  
+      if (hasCollision) {
+        setStatus('collision')
+        return
+      }
+    }
+   
   },[blocks])
 
 
@@ -137,30 +187,46 @@ const Tetris = () =>{
   }
 
   const moveBlock = (direction) => {
-    // if(!(direction in DIRECTION_LIST)) {
-    //   return
-    // }
-    setBlocks((prevState) => {
-      const prevBlocks = [...prevState];
-      const updatedBlocks = BlockHandler(prevBlocks, direction);
-      return updatedBlocks;
-    });
+
+    let reeachedBoundary = false
+    let willCollision = false
+
+    if (reeachedBoundaryOn([...blocks]) === direction) {
+      reeachedBoundary = true
+    } 
+
+    if (!reeachedBoundary) {
+      const nextBlock = BlockHandler([...blocks],direction)
+      const blockColoredDict = getColoredCoorTheme(nextBlock)
+      const currentSquare = [...squares]
+      currentSquare.forEach((row, y) => {
+        row.forEach((colorCode, x) => {
+          if ( x in blockColoredDict 
+            && y in blockColoredDict[x] 
+            && blockColoredDict[x][y] !== DEF_CHIP_THEME_CODE 
+            && colorCode !== DEF_CHIP_THEME_CODE ){
+              
+            willCollision = true
+          }
+        })
+      })
+    }
+
+    if (!reeachedBoundary && !willCollision) {
+      setBlocks((prevState) => {
+        const prevBlocks = [...prevState];
+        const updatedBlocks = BlockHandler(prevBlocks, direction);
+        return updatedBlocks;
+      });
+    }
   }
 
   return (
     <div className='container'>
       <div className='Tetris_upper_container'>
-        {squares.map((row, y)=>(
-          row?.map((themeCode, x)=>(
-            <Square key={x+'-'+y} themeCode={themeCode} coor={x+'-'+y}></Square>
-          ))
-        ))}
+        <SquareLayer squares={squares}/>
         <div className='above_Tetris_upper_container'>
-          {blocks.map((row, y)=>(
-            row.map((themeCode, x)=>(
-              <Block key={x+'-'+y} themeCode={themeCode} coor={x+'-'+y}></Block>
-            ))
-          ))}
+          <BlockLayer blocks={blocks}/>
         </div>
       </div>
       <div className='lower_container'>

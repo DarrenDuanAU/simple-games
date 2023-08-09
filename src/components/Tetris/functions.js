@@ -40,6 +40,23 @@ export const getColoredCoors = (data) => {
   return coloredCoors
 }
 
+export const reeachedBoundaryOn = (data) => {
+  const local_data = [...data]
+  let result = 'no'
+  local_data.forEach((row, y) => {
+    row.forEach((colorCode, x) => {
+      if( x === 0 && colorCode !== DEF_CHIP_THEME_CODE) {
+        result = 'left'
+      }
+
+      if (x === MAX_X - 1 && colorCode !== DEF_CHIP_THEME_CODE ) {
+        result = 'right'
+      }
+    })
+  })
+  return result
+}
+
 // const inContainer = (coors) => {
 //   let result = true
 //   let rangeX = [0, MAX_X -1]
@@ -63,23 +80,24 @@ export const getColoredCoors = (data) => {
 
 
 export const BlockHandler = (data, direction) => {
+  let localData = [...data]
   switch(direction){
     case 'down':
-      data.shift();
+      localData.shift();
       const defColorArray = new Array(MAX_X).fill(DEF_CHIP_THEME_CODE);
-      data.push(defColorArray);
-      return data
+      localData.push(defColorArray);
+      return localData
     case 'left':
-      return data.map((row)=>{
-        row=row.slice(1)
-        row.push(DEF_CHIP_THEME_CODE)
-        return row
+      return localData.map((row)=>{
+        let newRow=row.slice(1)
+        newRow.push(DEF_CHIP_THEME_CODE)
+        return newRow
       })
     case 'right':
-      return data.map((row)=>{
-        row=row.slice(0,row.length-1)
-        row.unshift(DEF_CHIP_THEME_CODE)
-        return row
+      return localData.map((row)=>{
+        let newRow=row.slice(0,row.length-1)
+        newRow.unshift(DEF_CHIP_THEME_CODE)
+        return newRow
       })
     default:
       console.log('function BlockHandler: invalid direction')
