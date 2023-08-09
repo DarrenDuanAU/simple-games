@@ -6,7 +6,7 @@ const Block = ({
 }) => {
   return (
     <div className={`block block_${CHIP_THEME[themeCode].color}`}>
-      {coor}
+      {/* {coor} */}
     </div>
   )
 }

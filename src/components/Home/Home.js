@@ -1,9 +1,14 @@
+import { useEffect } from 'react'
 import ScoreBoard from './components/ScoreBoard'
 import './style.css'
 
 const Home = ({
-  score
+  score,
+  intervalIds
 }) => {
+  useEffect(()=> {
+    intervalIds.current.forEach(intervalId => clearInterval(intervalId))
+  },[intervalIds])
 
   return (
   <div className='home'>

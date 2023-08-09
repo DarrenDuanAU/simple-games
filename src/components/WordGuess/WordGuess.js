@@ -5,12 +5,18 @@ import { useEffect, useState } from 'react'
 import './style.css'
 
 const WordGuess = ({
-  setScore
+  setScore,
+  intervalIds
 }) => {
   const [currentWord, setCurrentWord] = useState("CLICK 2START");
   const [markedWord, setMarkedWord] = useState("CLICK 2START");
   const [clickCounter, setClickCounter] = useState(0);
   const [inputIds, setInputIds] = useState([0])
+
+  useEffect(()=> {
+    intervalIds.current.forEach(intervalId => clearInterval(intervalId))
+  },[intervalIds])
+
 
   useEffect(() => {
     if(inputIds.length === 0) {

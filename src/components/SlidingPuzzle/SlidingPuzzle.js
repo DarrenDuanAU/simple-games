@@ -8,6 +8,7 @@ import { SHREK_PIECES,PUZZLE_CLICK_MAP } from './constants'
 
 const SlidingPuzzle = ({
   setScore,
+  intervalIds
 }) => {
   const firstUpdate = useRef(0);
   const [imageIds, SetImageIds] = useState([0, 1, 2, 3, 4, 5, 6, 7, 8]);
@@ -17,6 +18,10 @@ const SlidingPuzzle = ({
   const startTheGame = () => {
     setGameStarted(prevState => !prevState);
   }
+
+  useEffect(()=> {
+    intervalIds.current.forEach(intervalId => clearInterval(intervalId))
+  },[intervalIds])
 
   useEffect(() => {
     const OriginImageIds = [0, 1, 2, 3, 4, 5, 6, 7, 8];

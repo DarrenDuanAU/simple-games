@@ -6,7 +6,7 @@ const Square = ({
 }) => {
   return (
     <div className={`square square_${CHIP_THEME[themeCode].color}`}>
-      {coor}
+      {/* {coor} */}
     </div>
   )
 }

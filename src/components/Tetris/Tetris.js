@@ -1,9 +1,5 @@
 import './style/style.css'
 import { useEffect, useState, useRef } from 'react'
-
-// import Square from './components/Square'
-// import Block from './components/Block'
-
 import SquareLayer from './components/SquareLayer'
 import BlockLayer from './components/BlockLayer'
 
@@ -17,18 +13,21 @@ import { randomPick,
   BlockHandler,
   reeachedBoundaryOn } from './functions'
 
-const Tetris = () =>{
+const Tetris = ({
+  setScore,
+  intervalIds
+}) =>{
   const [status, setStatus] = useState('notStart')
   const [squares, setSquares] = useState(INIT_DATA)
   const [blocks, setBlocks] = useState(INIT_DATA)
   const prevBlocksRef = useRef(blocks)
   const prevSquaresRef = useRef(squares)
-  const intervalIds = useRef([])
 
   // useEffect(()=>{
   //   document.addEventListener('keydown', (event) =>{
-  //     console.log(`${event.key.slice(5).toLowerCase()}`);
-  //     moveBlock(`${event.key.slice(5).toLowerCase()}`)
+  //     const direction = event.key.slice(5).toLowerCase()
+  //     console.log(direction);
+  //     moveBlock(direction)
   //   })
   // },[])
 
@@ -45,7 +44,7 @@ const Tetris = () =>{
       case 'newBlock':
         const newColorCode = 1;
         const newCoors = randomPick(START_BLOCK_COOR);
-        console.log(newCoors)
+        // console.log(newCoors)
         setBlocks((prevState) => {
           const prevBlocks = [...prevState];
           return prevBlocks.map((row, index_y) => {
@@ -61,7 +60,7 @@ const Tetris = () =>{
         setStatus('start')
         break
       case 'start':
-        console.log('start!')
+        // console.log('start!')
         const intervalId = setInterval(() => {
           setBlocks((prevState) => {
             const prevBlocks = [...prevState];
@@ -91,7 +90,7 @@ const Tetris = () =>{
         break
 
       case 'removeRows':
-        console.log('removeRows')  
+        // console.log('removeRows')  
         const currentSquare = [...prevSquaresRef.current]
         const coloredRowIndexList = []
         currentSquare.forEach((row, y) => {
@@ -106,7 +105,9 @@ const Tetris = () =>{
           }
         })
         const coloredRowIndexListReverse = coloredRowIndexList.reverse()
-        console.log('row to remove',coloredRowIndexListReverse)
+        const winScore = coloredRowIndexListReverse.length
+        setScore(s => s + winScore)
+        // console.log('row to remove',coloredRowIndexListReverse)
         if (coloredRowIndexListReverse.length !== 0) {
           setSquares(prevSquares => {
             const temp = [...prevSquares]
@@ -122,13 +123,10 @@ const Tetris = () =>{
         break
 
       default:
-        console.log('invalid game status')
-
-
-
+        // console.log('invalid game status')
     }
 
-  }, [status]);
+  }, [status,setScore,intervalIds]);
 
   useEffect(()=>{
     // console.log(getColoredCoors(blocks))
@@ -149,10 +147,6 @@ const Tetris = () =>{
 
   useEffect(()=>{
     if (blocks !== INIT_DATA) {
-
-      
-      // console.log(reeachedBoundary([...blocks]))
-      
 
       let hasCollision = false;
       const nextBlock = BlockHandler([...blocks], 'down')

@@ -12,7 +12,8 @@ export const CHIP_THEME = {
 export const INIT_DATA = new Array(MAX_Y).fill(new Array(MAX_X).fill(0))
 
 export const START_BLOCK_COOR = [
-  // [[4,MAX_Y-1]],
-  [[4,MAX_Y-1],[4,MAX_Y-2]]
+  [[4,MAX_Y-1]],
+  [[4,MAX_Y-1],[4,MAX_Y-2]],
+  [[4,MAX_Y-1],[4,MAX_Y-2],[5,MAX_Y-1],[5,MAX_Y-2]]
 ]
 
