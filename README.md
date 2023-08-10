@@ -11,7 +11,7 @@ Demo: https://whitebear-booklet.net
 
 
 # Details
-![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/Tetris.png)
+![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/tetris.png)
 The basic structure of this project:
 - App
   - Header
