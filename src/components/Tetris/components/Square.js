@@ -1,4 +1,4 @@
-import { CHIP_THEME } from "../constants";
+import { CHIP_THEME, DEF_CHIP_THEME_CODE } from "../constants";
 
 const Square = ({
   coor,
@@ -7,6 +7,7 @@ const Square = ({
   return (
     <div className={`square square_${CHIP_THEME[themeCode].color}`}>
       {/* {coor} */}
+      <div className={themeCode !== DEF_CHIP_THEME_CODE ?'triangle':''}></div>
     </div>
   )
 }

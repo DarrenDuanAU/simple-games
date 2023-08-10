@@ -40,6 +40,7 @@ $squreHeight: 30px;
   border:1px solid #000;
   height: $squreHeight;
   width: $squreWidth;
+  position: relative;
 }
 
 .square_blue {
@@ -56,6 +57,7 @@ $squreHeight: 30px;
   border:1px solid #000;
   height: $squreHeight;
   width: $squreWidth;
+  position: relative;
 }
 
 .block_blue {
@@ -66,7 +68,7 @@ $squreHeight: 30px;
   background-color: #303137;
 }
 
-/* .triangle {
+.triangle {
   width: 0;
   height: 0;
   border-top: 7px solid white;
@@ -74,5 +76,5 @@ $squreHeight: 30px;
   top:2px;
   right:2px;
   position: absolute;
-} */
+} 
 
