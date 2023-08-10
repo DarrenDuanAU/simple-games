@@ -8,10 +8,17 @@ This project has been built from scrach which contains scoreboard and three basi
 Demo: https://whitebear-booklet.net
 
 # Overview
+### Tetris
+![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/tetris.png)
 
+### Sliding Puzzle
+![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/SlidingPuzzle.png)
+
+### Word Guess
+![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/WordGuess.png)
 
 # Details
-![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/tetris.png)
+
 The basic structure of this project:
 - App
   - Header
