@@ -1,6 +1,8 @@
 # Simple-games
 
-This project has been built from scrach which contains scoreboard and three basic games:
+This project has been built from scrach with React.js and SASS.
+
+it contains scoreboard and three basic games:
 - Tetris
 - Sliding Puzzle
 - Word Guess 
