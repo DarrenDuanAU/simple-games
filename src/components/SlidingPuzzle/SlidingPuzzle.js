@@ -38,8 +38,8 @@ const SlidingPuzzle = ({
     //console.log('in useEffect')
     if (firstUpdate.current >=2 &&
       JSON.stringify(imageIds) === JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8])){
-        alert('win')
-        setScore(prevState => prevState + 1)
+        alert('you won 10 marks!')
+        setScore(prevState => prevState + 10)
     } else {
       firstUpdate.current = firstUpdate.current + 1
       //console.log('in initial2',imageIds, firstUpdate.current)

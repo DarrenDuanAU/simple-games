@@ -22,6 +22,7 @@ const Tetris = ({
   const [blocks, setBlocks] = useState(INIT_DATA)
   const prevBlocksRef = useRef(blocks)
   const prevSquaresRef = useRef(squares)
+  const [tetrisScore, setTetrisScore] = useState(0)
 
   // useEffect(()=>{
   //   document.addEventListener('keydown', (event) =>{
@@ -107,6 +108,7 @@ const Tetris = ({
         const coloredRowIndexListReverse = coloredRowIndexList.reverse()
         const winScore = coloredRowIndexListReverse.length
         setScore(s => s + winScore)
+        setTetrisScore(s => s + winScore)
         // console.log('row to remove',coloredRowIndexListReverse)
         if (coloredRowIndexListReverse.length !== 0) {
           setSquares(prevSquares => {
@@ -217,6 +219,7 @@ const Tetris = ({
 
   return (
     <div className='container'>
+      <div className='Teris_score_board' >Tetris score: {tetrisScore}</div>
       <div className='Tetris_upper_container'>
         <SquareLayer squares={squares}/>
         <div className='above_Tetris_upper_container'>

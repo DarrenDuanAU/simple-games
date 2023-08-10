@@ -1,9 +1,17 @@
-# simple-games
+# Simple-games
 
-A showcase for my understanding of readable, matainable resuable code and how to create a React app.
+This project has been built from scrach which contains scoreboard and three basic games:
+- Tetris
+- Sliding Puzzle
+- Word Guess 
 
-This project have three basic games (Word Guess, Sliding Puzzle, Tetris) and a scoreboard recording the total time of the user's wins.
+Demo: https://whitebear-booklet.net
 
+# Overview
+
+
+# Details
+![alt text](https://github.com/DarrenDuanAU/simple-games/blob/main/images/Tetris.png)
 The basic structure of this project:
 - App
   - Header
@@ -18,8 +26,9 @@ The basic structure of this project:
   - Tetris
   - Button (common components)
 
-## Available Scripts
+# Quick Start
 
-In the project directory, you can run:
+- download this repo
+- In the project directory, you can run:
 
 `npm install` and then `npm start`

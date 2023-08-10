@@ -20,7 +20,7 @@ const WordGuess = ({
 
   useEffect(() => {
     if(inputIds.length === 0) {
-      alert('win')
+      alert('you won 3 marks!')
       setScore(prevState => prevState + 1)
     }
   }, [inputIds,setScore])

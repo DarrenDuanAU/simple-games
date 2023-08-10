@@ -3,7 +3,7 @@ const ScoreBoard = ({
 }) => {
   return (
     <div>
-      Your score: {score}
+      Your total score: {score}
     </div>
   )
 }
