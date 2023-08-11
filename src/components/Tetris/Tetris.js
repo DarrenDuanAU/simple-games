@@ -17,6 +17,7 @@ const Tetris = ({
   setScore,
   intervalIds
 }) =>{
+  const [gameStart, setGameStart] = useState(false)
   const [status, setStatus] = useState('notStart')
   const [squares, setSquares] = useState(INIT_DATA)
   const [blocks, setBlocks] = useState(INIT_DATA)
@@ -45,7 +46,6 @@ const Tetris = ({
       case 'newBlock':
         const newColorCode = 1;
         const newCoors = randomPick(START_BLOCK_COOR);
-        // console.log(newCoors)
         setBlocks((prevState) => {
           const prevBlocks = [...prevState];
           return prevBlocks.map((row, index_y) => {
@@ -125,7 +125,7 @@ const Tetris = ({
         break
 
       default:
-        // console.log('invalid game status')
+        console.log('invalid game status')
     }
 
   }, [status,setScore,intervalIds]);
@@ -180,6 +180,7 @@ const Tetris = ({
 
   const startGame = () => {
     setStatus('newBlock')
+    setGameStart(true)
   }
 
   const moveBlock = (direction) => {
@@ -227,10 +228,14 @@ const Tetris = ({
         </div>
       </div>
       <div className='lower_container'>
-        <Button onClick={startGame}>start</Button>
-        <Button onClick={() => moveBlock('left')}>L</Button>
-        <Button onClick={() => moveBlock('down')}>D</Button>
-        <Button onClick={() => moveBlock('right')}>R</Button>
+        {gameStart
+          ? (<>
+            <Button onClick={() => moveBlock('left')}>L</Button>
+            <Button onClick={() => moveBlock('down')}>D</Button>
+            <Button onClick={() => moveBlock('right')}>R</Button>
+          </>)
+          : <Button onClick={startGame}>start</Button>
+        }
       </div>
     </div>
     
