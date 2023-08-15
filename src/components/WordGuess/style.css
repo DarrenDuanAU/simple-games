@@ -39,3 +39,7 @@
   align-items: center;
   margin: 10px;
 }
+
+.word_guess_scoreboard {
+  margin-bottom: 10px;
+}

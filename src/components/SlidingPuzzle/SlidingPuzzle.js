@@ -60,7 +60,8 @@ const SlidingPuzzle = ({
   }
 
   return(
-    <div>
+    <div className='container'>
+      <div className='sliding_puzzle_scoreBoard'>Solve puzzle to win 10 points</div>
       <div className="SlidingPuzzle_main_container">
         <div className={mask}></div>
         {imageIds.map((imageId,index) => 

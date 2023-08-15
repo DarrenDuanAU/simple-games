@@ -12,6 +12,7 @@ const WordGuess = ({
   const [markedWord, setMarkedWord] = useState("CLICK 2START");
   const [clickCounter, setClickCounter] = useState(0);
   const [inputIds, setInputIds] = useState([0])
+  const [WordGuessScore, setWorGuessScore] = useState(0)
 
   useEffect(()=> {
     intervalIds.current.forEach(intervalId => clearInterval(intervalId))
@@ -20,8 +21,8 @@ const WordGuess = ({
 
   useEffect(() => {
     if(inputIds.length === 0) {
-      alert('you won 3 marks!')
-      setScore(prevState => prevState + 1)
+      setScore(prevState => prevState + 3)
+      setWorGuessScore(s => s + 3)
     }
   }, [inputIds,setScore])
 
@@ -71,6 +72,7 @@ const WordGuess = ({
 
   return (
     <div className='container'>
+      <di className='word_guess_scoreboard'>Word Guess Score: {WordGuessScore}</di>   
       <div className="upper_container">
         { markedWord.split('').map( (character ,index) =>  (<Chip key={`${clickCounter} - ${index}`} onChange={checkAnswer} index={index} char={character} />)) }
         
