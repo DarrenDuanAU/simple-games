@@ -1,11 +1,15 @@
-# Simple-games
+# Casual Games Hub
 
-This project has been built from scrach with React.js and SASS.
+Description: This project is a casual games hub built from scratch using React.js and SASS. It features a scoreboard and three simple games:
 
-it contains scoreboard and three basic games:
-- Tetris
-- Sliding Puzzle
-- Word Guess 
+- Tetris: Players manipulate differently shaped blocks to create complete rows at the bottom and score points by clearing them.
+
+- Sliding Puzzle: Players need to rearrange scrambled puzzle pieces by sliding them, aiming to recreate a complete image.
+
+- Word Guess: Players guess words based on provided hints, gradually revealing the word by guessing correct letters to win the game.
+
+We harness the power of React.js and SASS technologies to provide an enjoyable gaming experience. Players are invited to take on the challenge of various games, exercising their minds and unwinding in the process.
+
 
 Demo: https://whitebear-booklet.net
 
